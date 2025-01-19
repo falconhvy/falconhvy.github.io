@@ -1,3 +1,12 @@
+import Profile from "@/components/profile";
+
 export default function Home() {
-  return <div>Hello, world!</div>;
+  return (
+    <div>
+      <Profile />
+      <section>
+        <p>Hello, world!</p>
+      </section>
+    </div>
+  );
 }
