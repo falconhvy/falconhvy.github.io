@@ -1,6 +1,7 @@
 import Posts from "@/services/posts";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/utils/date";
+import Comment from "@/components/comment";
 
 export default function PostPage({ params }: { params: PostPageParams }) {
   const { title, createdAt, bodyHtml } = Posts.get(params.id) ?? notFound();
@@ -12,6 +13,7 @@ export default function PostPage({ params }: { params: PostPageParams }) {
         <p className="text-sm text-neutral-600">{formatDate(createdAt)}</p>
         <div dangerouslySetInnerHTML={{ __html: bodyHtml }} className="prose mt-10 break-words" />
       </article>
+      <Comment />
     </div>
   );
 }
