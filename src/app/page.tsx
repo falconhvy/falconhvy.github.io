@@ -1,12 +1,11 @@
 import Profile from "@/components/profile";
+import Posts from "@/components/posts";
 
 export default function Home() {
   return (
     <div>
       <Profile />
-      <section>
-        <p>Hello, world!</p>
-      </section>
+      <Posts />
     </div>
   );
 }
