@@ -1,11 +1,14 @@
 import Profile from "@/components/profile";
-import Posts from "@/components/posts";
+import PostList from "@/components/post-list";
+import Posts from "@/services/posts";
 
 export default function Home() {
+  const posts = Posts.getAll();
+
   return (
     <div>
       <Profile />
-      <Posts />
+      <PostList posts={posts} />
     </div>
   );
 }

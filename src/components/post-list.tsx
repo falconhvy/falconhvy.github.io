@@ -1,17 +1,11 @@
 import Link from "next/link";
 import { formatDate } from "@/utils/date";
 
-export default function Posts() {
-  const posts = [
-    { id: "3", title: "Hello, world!", createdAt: new Date() },
-    { id: "2", title: "Hello, world!", createdAt: new Date() },
-    { id: "1", title: "Hello, world!", createdAt: new Date() },
-  ];
-
+export default function PostList(props: PostListProps) {
   return (
     <section>
       <ul>
-        {posts.map(post => (
+        {props.posts.map(post => (
           <PostListItem key={post.id} id={post.id} title={post.title} createdAt={post.createdAt} />
         ))}
       </ul>
@@ -19,10 +13,14 @@ export default function Posts() {
   );
 }
 
+interface PostListProps {
+  posts: PostListItemProps[];
+}
+
 function PostListItem(props: PostListItemProps) {
   return (
     <li>
-      <Link href={"/"} className="flex flex-row py-2">
+      <Link href={`/posts/${props.id}`} className="flex flex-row py-2">
         <p className="w-[100px] tracking-tight text-neutral-600">{formatDate(props.createdAt)}</p>
         <p>{props.title}</p>
       </Link>
