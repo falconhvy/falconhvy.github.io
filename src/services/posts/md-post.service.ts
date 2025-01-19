@@ -10,9 +10,11 @@ export default class MarkdownPostService extends PostService {
       const id = getIdFromFilePath(filePath);
 
       const { frontMatter, bodyHtml } = parseMarkdownFile(filePath);
-      const title = frontMatter.title ?? this.throwIfNull(filePath, "title");
-      const createdAt = new Date(frontMatter.createdAt ?? this.throwIfNull(filePath, "createdAt"));
-      const hidden = frontMatter.hidden ?? false;
+      const title = (frontMatter.title as string) ?? this.throwIfNull(filePath, "title");
+      const createdAt = new Date(
+        (frontMatter.createdAt as string) ?? this.throwIfNull(filePath, "createdAt"),
+      );
+      const hidden = (frontMatter.hidden as boolean) ?? false;
 
       return { id, title, createdAt, hidden, bodyHtml };
     });

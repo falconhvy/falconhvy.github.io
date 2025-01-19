@@ -62,7 +62,7 @@ export function parseMarkdownFile(filePath: string): ParseMarkdownFileResult {
 }
 
 type ParseMarkdownFileResult = {
-  frontMatter: Record<string, any>;
+  frontMatter: Record<string, unknown>;
   bodyHtml: string;
 };
 
