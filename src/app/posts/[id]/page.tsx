@@ -10,7 +10,7 @@ export default function PostPage({ params }: { params: PostPageParams }) {
       <article className="pb-10 pt-5">
         <h1 className="mb-3 text-2xl font-semibold tracking-tight">{title}</h1>
         <p className="text-sm text-neutral-600">{formatDate(createdAt)}</p>
-        <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: bodyHtml }} className="prose mt-10 break-words" />
       </article>
     </div>
   );
