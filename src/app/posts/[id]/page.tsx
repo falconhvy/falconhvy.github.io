@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/utils/date";
 import Comment from "@/components/comment";
 
-export default function PostPage({ params }: { params: PostPageParams }) {
-  const { title, createdAt, bodyHtml } = Posts.get(params.id) ?? notFound();
+export default async function PostPage({ params }: { params: Promise<PostPageParams> }) {
+  const { id } = await params;
+  const { title, createdAt, bodyHtml } = Posts.get(id) ?? notFound();
 
   return (
     <div>
