@@ -3,6 +3,15 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/utils/date";
 import Comment from "@/components/comment";
 
+export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
+  const { id } = await params;
+  const { title } = Posts.get(id) ?? notFound();
+
+  return {
+    title: `${title} — wdvsh`,
+  };
+}
+
 export default async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const { id } = await params;
   const { title, createdAt, bodyHtml } = Posts.get(id) ?? notFound();
