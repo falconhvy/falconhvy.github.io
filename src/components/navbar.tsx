@@ -4,6 +4,7 @@ export default function Navbar() {
   const navItems = [
     { label: "home", href: "/" },
     { label: "github", href: "https://github.com/wdvsh" },
+    { label: "wiki", href: "https://organization-dtn.gitbook.io/wdvsh" },
   ];
 
   return (
