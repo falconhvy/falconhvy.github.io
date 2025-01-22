@@ -3,15 +3,6 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/utils/date";
 import Comment from "@/components/comment";
 
-export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
-  const { id } = await params;
-  const { title } = Posts.get(id) ?? notFound();
-
-  return {
-    title: `${title} — wdvsh`,
-  };
-}
-
 export default async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const { id } = await params;
   const { title, createdAt, bodyHtml } = Posts.get(id) ?? notFound();
@@ -28,8 +19,24 @@ export default async function PostPage({ params }: { params: Promise<PostPagePar
   );
 }
 
+export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
+  const { id } = await params;
+  const { title } = Posts.get(id) ?? notFound();
+
+  return {
+    title: `${title} — wdvsh`,
+  };
+}
+
 export async function generateStaticParams(): Promise<PostPageParams[]> {
-  return Posts.getAll().map(({ id }) => ({ id }));
+  const posts = Posts.getAll();
+
+  // 빈 결과를 반환하면 빌드 에러가 발생하므로, 빈 배열 대신 특정 값을 반환합니다.
+  if (!posts || posts.length === 0) {
+    return [{ id: "not-found" }];
+  }
+
+  return posts.map(({ id }) => ({ id }));
 }
 
 interface PostPageParams {

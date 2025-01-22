@@ -2,6 +2,16 @@ import Link from "next/link";
 import { formatDate } from "@/utils/date";
 
 export default function PostList(props: PostListProps) {
+  const { posts } = props;
+
+  if (!posts || posts.length === 0) {
+    return (
+      <section>
+        <p className="text-neutral-600">No posts available!</p>
+      </section>
+    );
+  }
+
   return (
     <section>
       <ul>
