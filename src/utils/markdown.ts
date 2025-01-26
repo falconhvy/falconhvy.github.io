@@ -7,6 +7,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
+import remarkChangeImageSrc from "@/utils/remark-change-image-src";
 
 /**
  * Find all markdown files under the directory
@@ -57,7 +58,7 @@ export function parseMarkdownFile(filePath: string): ParseMarkdownFileResult {
 
   return {
     frontMatter: parsed.data,
-    bodyHtml: convertMarkdownToHtml(parsed.content),
+    bodyHtml: convertMarkdownToHtml(getIdFromFilePath(filePath), parsed.content),
   };
 }
 
@@ -66,10 +67,11 @@ type ParseMarkdownFileResult = {
   bodyHtml: string;
 };
 
-function convertMarkdownToHtml(mdContent: string): string {
+function convertMarkdownToHtml(postId: string, mdContent: string): string {
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkChangeImageSrc, { postId })
     .use(remarkRehype)
     .use(rehypeStringify)
     .processSync(mdContent)
