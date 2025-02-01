@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm run clean-post-assets && next dev",
+    "build": "npm run clean-post-assets && next build",
+    "lint": "next lint",
+    "clean-post-assets": "rm -rf public/_assets"
   },
   "dependencies": {
     "next": "15.1.5",
