@@ -1,5 +1,6 @@
 import { visit } from "unist-util-visit";
 import path from "node:path";
+import { POST_ASSETS_DIR } from "@/utils/constants";
 
 export default function remarkChangeImageSrc(options) {
   const { postId } = options;
@@ -20,6 +21,6 @@ export default function remarkChangeImageSrc(options) {
 }
 
 function getNewImageSrcFromPostId(postId, oldImageSrc) {
-  const basePath = `/_assets/${postId}`;
+  const basePath = path.resolve("/", POST_ASSETS_DIR, postId);
   return path.resolve(basePath, oldImageSrc);
 }

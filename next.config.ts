@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import CopyPlugin from "copy-webpack-plugin";
 import path from "node:path";
+import { POST_ASSETS_DIR } from "@/utils/constants";
 
 const nextConfig: NextConfig = {
   // Enable static export
@@ -13,7 +14,7 @@ const nextConfig: NextConfig = {
         patterns: [
           {
             from: path.resolve(__dirname, "contents"),
-            to: path.resolve(__dirname, "public/_assets"),
+            to: path.resolve(__dirname, "public", POST_ASSETS_DIR),
           },
         ],
       }),
