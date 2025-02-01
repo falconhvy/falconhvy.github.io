@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import remarkChangeImageSrc from "@/utils/remark-change-image-src";
+import rehypeSlug from "rehype-slug";
 
 /**
  * Find all markdown files under the directory
@@ -73,6 +74,7 @@ function convertMarkdownToHtml(mdContent: string, filePath: string, rootDirPath:
     .use(remarkGfm)
     .use(remarkChangeImageSrc, { mdFilePath: filePath, rootDirPath })
     .use(remarkRehype)
+    .use(rehypeSlug)
     .use(rehypeStringify)
     .processSync(mdContent)
     .toString();
