@@ -52,13 +52,13 @@ function isMarkdownFile(filePath: string): boolean {
  * @param filePath Path to the markdown file
  * @return Parsed markdown file result
  */
-export function parseMarkdownFile(filePath: string): ParseMarkdownFileResult {
+export function parseMarkdownFile(filePath: string, rootDirPath: string): ParseMarkdownFileResult {
   const fileContent = fs.readFileSync(filePath);
   const parsed = matter(fileContent);
 
   return {
     frontMatter: parsed.data,
-    bodyHtml: convertMarkdownToHtml(getIdFromFilePath(filePath), parsed.content),
+    bodyHtml: convertMarkdownToHtml(parsed.content, filePath, rootDirPath),
   };
 }
 
@@ -67,11 +67,11 @@ type ParseMarkdownFileResult = {
   bodyHtml: string;
 };
 
-function convertMarkdownToHtml(postId: string, mdContent: string): string {
+function convertMarkdownToHtml(mdContent: string, filePath: string, rootDirPath: string): string {
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkChangeImageSrc, { postId })
+    .use(remarkChangeImageSrc, { mdFilePath: filePath, rootDirPath })
     .use(remarkRehype)
     .use(rehypeStringify)
     .processSync(mdContent)

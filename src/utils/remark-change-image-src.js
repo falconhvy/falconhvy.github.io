@@ -1,26 +1,38 @@
 import { visit } from "unist-util-visit";
 import path from "node:path";
 import { POST_ASSETS_DIR } from "@/utils/constants";
+import { getIdFromFilePath } from "@/utils/markdown";
 
 export default function remarkChangeImageSrc(options) {
-  const { postId } = options;
+  const { mdFilePath, rootDirPath } = options;
 
-  if (typeof postId !== "string") {
-    throw new Error("postId must be a string");
+  if (typeof mdFilePath !== "string" || !mdFilePath) {
+    throw new Error("mdFilePath must be provided");
   }
 
-  if (!postId) {
-    throw new Error("postId must not be empty");
+  if (typeof rootDirPath !== "string" || !rootDirPath) {
+    throw new Error("rootDirPath must be provided");
   }
 
   return tree => {
     visit(tree, "image", node => {
-      node.url = getNewImageSrcFromPostId(postId, node.url);
+      node.url = getNewImageSrcFromPostId(node.url, mdFilePath, rootDirPath);
     });
   };
 }
 
-function getNewImageSrcFromPostId(postId, oldImageSrc) {
-  const basePath = path.resolve("/", POST_ASSETS_DIR, postId);
-  return path.resolve(basePath, oldImageSrc);
+function getNewImageSrcFromPostId(oldImageSrc, mdFilePath, rootDirPath) {
+  let upperPathExceptFileName = path.dirname(mdFilePath);
+  if (upperPathExceptFileName.startsWith(rootDirPath)) {
+    upperPathExceptFileName = upperPathExceptFileName.slice(rootDirPath.length);
+  }
+
+  const postId = getIdFromFilePath(mdFilePath);
+  const imageBasePath = path.join(
+    "/",
+    POST_ASSETS_DIR,
+    postId === "index" ? path.join(upperPathExceptFileName, postId) : upperPathExceptFileName,
+  );
+
+  return path.resolve(imageBasePath, oldImageSrc);
 }
