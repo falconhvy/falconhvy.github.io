@@ -14,7 +14,10 @@ const nextConfig: NextConfig = {
         patterns: [
           {
             from: path.resolve(__dirname, "contents"),
-            to: path.resolve(__dirname, "public", POST_ASSETS_DIR),
+            to({ context, absoluteFilename }) {
+              return `${path.resolve(__dirname, "public", POST_ASSETS_DIR)}/${path.relative(context, absoluteFilename!)}`;
+            },
+            toType: "file",
           },
         ],
       }),
