@@ -3,3 +3,5 @@
  * (/public/${POST_ASSETS_DIR})
  */
 export const POST_ASSETS_DIR = "_assets";
+
+export const BLOG_HOST = "https://wdvsh.github.io";
