@@ -20,6 +20,6 @@ export default function remarkChangeImageSrc(options) {
 }
 
 function getNewImageSrcFromPostId(postId, oldImageSrc) {
-  const basePath = `/resources/${postId}`;
+  const basePath = `/_assets/${postId}`;
   return path.resolve(basePath, oldImageSrc);
 }

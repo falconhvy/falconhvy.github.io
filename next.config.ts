@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
         patterns: [
           {
             from: path.resolve(__dirname, "contents"),
-            to: path.resolve(__dirname, "public/posts"),
+            to: path.resolve(__dirname, "public/_assets"),
           },
         ],
       }),
