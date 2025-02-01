@@ -9,7 +9,10 @@ export default class MarkdownPostService extends PostService {
     return findMarkdownFilePaths(MarkdownPostService.ROOT_DIR_PATH).map(filePath => {
       const id = getIdFromFilePath(filePath);
 
-      const { frontMatter, bodyHtml } = parseMarkdownFile(filePath);
+      const { frontMatter, bodyHtml } = parseMarkdownFile(
+        filePath,
+        MarkdownPostService.ROOT_DIR_PATH,
+      );
       const title = (frontMatter.title as string) ?? this.throwIfNull(filePath, "title");
       const createdAt = new Date(
         (frontMatter.createdAt as string) ?? this.throwIfNull(filePath, "createdAt"),

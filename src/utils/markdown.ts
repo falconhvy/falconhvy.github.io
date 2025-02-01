@@ -7,6 +7,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
+import remarkChangeImageSrc from "@/utils/remark-change-image-src";
 
 /**
  * Find all markdown files under the directory
@@ -51,13 +52,13 @@ function isMarkdownFile(filePath: string): boolean {
  * @param filePath Path to the markdown file
  * @return Parsed markdown file result
  */
-export function parseMarkdownFile(filePath: string): ParseMarkdownFileResult {
+export function parseMarkdownFile(filePath: string, rootDirPath: string): ParseMarkdownFileResult {
   const fileContent = fs.readFileSync(filePath);
   const parsed = matter(fileContent);
 
   return {
     frontMatter: parsed.data,
-    bodyHtml: convertMarkdownToHtml(parsed.content),
+    bodyHtml: convertMarkdownToHtml(parsed.content, filePath, rootDirPath),
   };
 }
 
@@ -66,10 +67,11 @@ type ParseMarkdownFileResult = {
   bodyHtml: string;
 };
 
-function convertMarkdownToHtml(mdContent: string): string {
+function convertMarkdownToHtml(mdContent: string, filePath: string, rootDirPath: string): string {
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkChangeImageSrc, { mdFilePath: filePath, rootDirPath })
     .use(remarkRehype)
     .use(rehypeStringify)
     .processSync(mdContent)
