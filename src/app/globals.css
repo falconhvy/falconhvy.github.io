@@ -11,3 +11,46 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+/*
+ * https://css.gg/icon/link/css > link
+ * rehype-autolink-headings에서 .icon.icon-link element를 생성하므로,
+ * 해당 element의 모양을 지정해주기 위함
+ */
+.icon.icon-link  {
+  box-sizing: border-box;
+  position: relative;
+  bottom: 4px;
+  left: 10px;
+  display: inline-block;
+  transform: rotate(-45deg) scale(0.8);
+  width: 8px;
+  height: 2px;
+  background: currentColor;
+  color: #ababab;
+  border-radius: 4px;
+}
+.icon.icon-link::after,
+.icon.icon-link::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 8px;
+  height: 10px;
+  border: 2px solid;
+  top: -4px;
+}
+.icon.icon-link::before {
+  border-right: 0;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  left: -6px;
+}
+.icon.icon-link::after {
+  border-left: 0;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  right: -6px;
+}
