@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
           {
             from: path.resolve(__dirname, "contents"),
             to: path.resolve(__dirname, "public", POST_ASSETS_DIR),
+            noErrorOnMissing: true,
           },
         ],
       }),
