@@ -76,7 +76,7 @@ function convertMarkdownToHtml(mdContent: string, filePath: string, rootDirPath:
     .use(remarkChangeImageSrc, { mdFilePath: filePath, rootDirPath })
     .use(remarkRehype)
     .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings, { behavior: "prepend" })
+    .use(rehypeAutolinkHeadings, { behavior: "append" })
     .use(rehypeStringify)
     .processSync(mdContent)
     .toString();

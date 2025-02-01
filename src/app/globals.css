@@ -20,10 +20,10 @@ body {
 .icon.icon-link  {
   box-sizing: border-box;
   position: relative;
-  top: -5px;
-  right: 10px;
+  bottom: 4px;
+  left: 10px;
   display: inline-block;
-  transform: rotate(-45deg) scale(0.9);
+  transform: rotate(-45deg) scale(0.8);
   width: 8px;
   height: 2px;
   background: currentColor;
