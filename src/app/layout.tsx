@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "wdvsh",
+  title: "falconhvy",
   description: "개발자로서 배운 것, 고민하는 것, 즐기는 것들을 자유롭게 기록하는 공간입니다.",
 };
 

@@ -4,4 +4,4 @@
  */
 export const POST_ASSETS_DIR = "_assets";
 
-export const BLOG_HOST = "https://wdvsh.github.io";
+export const BLOG_HOST = "https://falconhvy.github.io";

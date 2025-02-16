@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<PostPagePar
   const { title } = Posts.get(id) ?? notFound();
 
   return {
-    title: `${title} — wdvsh`,
+    title: `${title} — falconhvy`,
   };
 }
 
