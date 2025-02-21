@@ -11,7 +11,7 @@ export default function Comment() {
     scriptElem.async = true;
     scriptElem.crossOrigin = "anonymous";
 
-    scriptElem.setAttribute("data-repo", "falconhvy/falconhvy.github.io");
+    scriptElem.setAttribute("data-repo", "wdvsh/wdvsh.github.io");
     scriptElem.setAttribute("data-repo-id", "R_kgDONrv8GA");
     scriptElem.setAttribute("data-category", "Blog Comments");
     scriptElem.setAttribute("data-category-id", "DIC_kwDONrv8GM4CmJ5D");
